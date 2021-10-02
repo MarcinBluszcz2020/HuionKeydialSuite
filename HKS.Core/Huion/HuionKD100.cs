@@ -23,7 +23,8 @@ namespace HKS.Core.Huion
 
         public HuionKD100()
         {
-            _device = HidDevices.Enumerate((int)DriverConst.HuionVendorId).FirstOrDefault();
+            var huionDevices = HidDevices.Enumerate((int)DriverConst.HuionVendorId).ToList();
+            _device = huionDevices.FirstOrDefault(o=>o.DevicePath.Contains("mi_00"));
 
             if (_device == null)
             {
