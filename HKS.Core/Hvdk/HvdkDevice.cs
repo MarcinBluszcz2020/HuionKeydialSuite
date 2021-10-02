@@ -110,18 +110,17 @@ namespace HKS.Core.Hvdk
 
         public void SendEmpty()
         {
-            Send(0, 0, 0, 0, 0, 0, 0, 0);
+            Send(0, 0, 0, 0, 0, 0, 0);
         }
 
-        public void Send(Byte Modifier, Byte Padding, Byte Key0, Byte Key1, Byte Key2, Byte Key3, Byte Key4, Byte Key5)
+        public void Send(Byte Modifier, Byte Key0, Byte Key1, Byte Key2, Byte Key3, Byte Key4, Byte Key5)
         {
             SetFeatureKeyboard KeyboardData = new SetFeatureKeyboard();
             KeyboardData.ReportID = 1;
             KeyboardData.CommandCode = 2;
-            KeyboardData.Timeout = 1000; //5 because we count in blocks of 5 in the driver
+            KeyboardData.Timeout = 1000;
             KeyboardData.Modifier = Modifier;
-            //padding should always be zero.
-            KeyboardData.Padding = Padding;
+            KeyboardData.Padding = 0;
             KeyboardData.Key0 = Key0;
             KeyboardData.Key1 = Key1;
             KeyboardData.Key2 = Key2;

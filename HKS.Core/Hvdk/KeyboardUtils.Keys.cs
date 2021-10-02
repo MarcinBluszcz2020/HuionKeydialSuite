@@ -6,10 +6,6 @@ namespace HKS.Core.Hvdk
     {
         public static class Keys
         {
-            public const string ENTER = "ENTER";
-            public const string ESCAPE = "ESCAPE";
-
-
             private static List<string> _keys;
 
             static Keys()
@@ -130,18 +126,23 @@ namespace HKS.Core.Hvdk
                 _keys.Add("F24"); //115
             }
 
-            public static byte GetKeyCode(string key)
+            public static byte? GetKeyCode(string key)
             {
                 int index = _keys.IndexOf(key);
 
                 if (index == -1)
                 {
-                    return 0;
+                    return null;
                 }
                 else
                 {
                     return (byte)index;
                 };
+            }
+
+            public static IEnumerable<string> GetKeys()
+            {
+                return _keys.AsReadOnly();
             }
         }
     }

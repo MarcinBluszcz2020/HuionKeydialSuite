@@ -1,8 +1,9 @@
 ﻿namespace HKS.Core.Hvdk
 {
-    public enum ModifierKey
+    public enum ModifierKey : byte
     {
-        LCTRL = 1,
+        NONE,
+        LCTRL,
         LSHIFT,
         LALT,
         LWIN,
