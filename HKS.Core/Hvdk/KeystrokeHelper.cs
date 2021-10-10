@@ -1,25 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace HKS.Core.Hvdk
 {
-   public class KeystrokeHelper
+    public class KeystrokeHelper
     {
         private readonly HvdkDevice _hvdkDevice;
+        private readonly object _lock;
 
         public KeystrokeHelper(HvdkDevice hvdkDevice)
         {
             _hvdkDevice = hvdkDevice;
+            _lock = new object();
+        }
+
+        public void SendKeystroke(List<string> keystrokeCollection)
+        {
+            if (keystrokeCollection == null)
+            {
+                return;
+            }
+
+            foreach (var keystroke in keystrokeCollection)
+            {
+                SendKeystroke(keystroke);
+            }
         }
 
         public void SendKeystroke(string keystroke)
         {
-            //todo: lock or semaphore
-
             if (string.IsNullOrWhiteSpace(keystroke))
             {
                 return;
@@ -34,8 +44,8 @@ namespace HKS.Core.Hvdk
 
             byte modifier = 0;
             List<byte> keys = new List<byte>();
-            
-            foreach(var stringKeyToSend in stringKeysToSend)
+
+            foreach (var stringKeyToSend in stringKeysToSend)
             {
                 var asModifier = KeyboardUtils.ModifierKeys.GetModifierKeyCode(stringKeyToSend);
 
@@ -67,11 +77,14 @@ namespace HKS.Core.Hvdk
 
             inputKeys.CopyTo(keysToSend);
 
-            _hvdkDevice.Send(modifier, keysToSend[0], keysToSend[1], keysToSend[2], keysToSend[3], keysToSend[4], keysToSend[5]);
+            lock (_lock)
+            {
+                _hvdkDevice.Send(modifier, keysToSend[0], keysToSend[1], keysToSend[2], keysToSend[3], keysToSend[4], keysToSend[5]);
 
-            Thread.Sleep(10);
+                Thread.Sleep(10);
 
-            _hvdkDevice.SendEmpty();
+                _hvdkDevice.SendEmpty();
+            }
         }
     }
 }

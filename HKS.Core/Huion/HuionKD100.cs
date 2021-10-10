@@ -148,7 +148,36 @@ namespace HKS.Core.Huion
             c1 = (byte_5 & (1 << 1)) > 0;
             c2 = (byte_5 & (1 << 2)) > 0;
 
-            return new HuionKeyReport(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, c0, c1, c2);
+            var reportBuilder = new HuionKeyReportBuilder();
+
+            reportBuilder
+                .KeyState(HuionKey.A0, a0)
+                .KeyState(HuionKey.A1, a1)
+                .KeyState(HuionKey.A2, a2)
+                .KeyState(HuionKey.A3, a3)
+                .KeyState(HuionKey.A4, a4)
+                .KeyState(HuionKey.A5, a5)
+                .KeyState(HuionKey.A6, a6)
+                .KeyState(HuionKey.A7, a7);
+
+            reportBuilder
+                .KeyState(HuionKey.B0, b0)
+                .KeyState(HuionKey.B1, b1)
+                .KeyState(HuionKey.B2, b2)
+                .KeyState(HuionKey.B3, b3)
+                .KeyState(HuionKey.B4, b4)
+                .KeyState(HuionKey.B5, b5)
+                .KeyState(HuionKey.B6, b6)
+                .KeyState(HuionKey.B7, b7);
+
+            reportBuilder
+                .KeyState(HuionKey.C0, c0)
+                .KeyState(HuionKey.C1, c1)
+                .KeyState(HuionKey.C2, c2);
+
+            var report = reportBuilder.BuildReport();
+
+            return report;
         }
 
         public void Dispose()

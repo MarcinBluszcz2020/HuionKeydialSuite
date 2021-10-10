@@ -1,7 +1,7 @@
 ﻿using HKS.Core;
 using HKS.Core.Hvdk;
 using HKS.Core.Map;
-using System.Threading;
+using System.Collections.Generic;
 
 namespace HuionKeydialSuite.ConsoleApp
 {
@@ -13,11 +13,11 @@ namespace HuionKeydialSuite.ConsoleApp
 
             var mapConfiguration = new HuionMap();
 
-            mapConfiguration.A0 = new HuionMapItem
+            mapConfiguration.Items.Add(new HuionMapItem
             {
                 Type = HuionMapItemType.Keyboard,
-                Keystroke = "[LSHIFT]+s"
-            };
+                Keystroke = new List<string>() { "[LSHIFT]+s" }
+            });
 
             var existing = MapHelper.GetMap();
             MapHelper.SaveMap(mapConfiguration);

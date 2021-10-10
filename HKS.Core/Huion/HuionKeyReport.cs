@@ -1,72 +1,45 @@
-﻿namespace HKS.Core.Huion
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace HKS.Core.Huion
 {
     public class HuionKeyReport
     {
-        public HuionKeyReport(
-            bool a0,
-            bool a1,
-            bool a2,
-            bool a3,
-            bool a4,
-            bool a5,
-            bool a6,
-            bool a7,
-            bool b0,
-            bool b1,
-            bool b2,
-            bool b3,
-            bool b4,
-            bool b5,
-            bool b6,
-            bool b7,
-            bool c0,
-            bool c1,
-            bool c2
-            )
+        public IReadOnlyCollection<HuionKey> PressedKeys { get; }
+
+        private IEnumerable<HuionKeyReportItem> Items { get; }
+
+        public HuionKeyReport(IEnumerable<HuionKeyReportItem> items)
         {
-            A0 = a0;
-            A1 = a1;
-            A2 = a2;
-            A3 = a3;
-            A4 = a4;
-            A5 = a5;
-            A6 = a6;
-            A7 = a7;
-
-            B0 = b0;
-            B1 = b1;
-            B2 = b2;
-            B3 = b3;
-            B4 = b4;
-            B5 = b5;
-            B6 = b6;
-            B7 = b7;
-
-            C0 = c0;
-            C1 = c1;
-            C2 = c2;
+            Items = items;
+            PressedKeys = items.Where(o => o.State).Select(o => o.Key).ToList().AsReadOnly();
         }
 
-        public bool A0 { get; }
-        public bool A1 { get; }
-        public bool A2 { get; }
-        public bool A3 { get; }
-        public bool A4 { get; }
-        public bool A5 { get; }
-        public bool A6 { get; }
-        public bool A7 { get; }
+        public bool A0 => GetKeyState(HuionKey.A0);
+        public bool A1 => GetKeyState(HuionKey.A1);
+        public bool A2 => GetKeyState(HuionKey.A2);
+        public bool A3 => GetKeyState(HuionKey.A3);
+        public bool A4 => GetKeyState(HuionKey.A4);
+        public bool A5 => GetKeyState(HuionKey.A5);
+        public bool A6 => GetKeyState(HuionKey.A6);
+        public bool A7 => GetKeyState(HuionKey.A7);
 
-        public bool B0 { get; }
-        public bool B1 { get; }
-        public bool B2 { get; }
-        public bool B3 { get; }
-        public bool B4 { get; }
-        public bool B5 { get; }
-        public bool B6 { get; }
-        public bool B7 { get; }
+        public bool B0 => GetKeyState(HuionKey.B0);
+        public bool B1 => GetKeyState(HuionKey.B1);
+        public bool B2 => GetKeyState(HuionKey.B2);
+        public bool B3 => GetKeyState(HuionKey.B3);
+        public bool B4 => GetKeyState(HuionKey.B4);
+        public bool B5 => GetKeyState(HuionKey.B5);
+        public bool B6 => GetKeyState(HuionKey.B6);
+        public bool B7 => GetKeyState(HuionKey.B7);
 
-        public bool C0 { get; }
-        public bool C1 { get; }
-        public bool C2 { get; }
+        public bool C0 => GetKeyState(HuionKey.C0);
+        public bool C1 => GetKeyState(HuionKey.C1);
+        public bool C2 => GetKeyState(HuionKey.C2);
+
+        public bool GetKeyState(HuionKey key)
+        {
+            return Items.FirstOrDefault(o => o.Key == key)?.State ?? false;
+        }
     }
 }

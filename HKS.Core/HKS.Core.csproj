@@ -46,6 +46,8 @@
     <Compile Include="Huion\HuionKD100.cs" />
     <Compile Include="Huion\HuionKeyReport.cs" />
     <Compile Include="Huion\HuionKey.cs" />
+    <Compile Include="Huion\HuionKeyReportBuilder.cs" />
+    <Compile Include="Huion\HuionKeyReportItem.cs" />
     <Compile Include="Hvdk\KeyboardUtils.cs" />
     <Compile Include="Hvdk\KeyboardUtils.Keys.cs" />
     <Compile Include="Hvdk\KeyboardUtils.ModifierKeys.cs" />

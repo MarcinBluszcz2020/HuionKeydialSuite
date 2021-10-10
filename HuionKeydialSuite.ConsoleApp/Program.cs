@@ -8,6 +8,9 @@ namespace HuionKeydialSuite.ConsoleApp
     {
         static void Main(string[] args)
         {
+            // HuionKD100Test.Test();
+            // HvdkTest.Test();
+
             var huion = new HKS.Core.Huion.HuionKD100();
             var hvdk = new HKS.Core.Hvdk.HvdkDevice();
 
