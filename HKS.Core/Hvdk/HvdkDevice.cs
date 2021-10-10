@@ -35,78 +35,12 @@ namespace HKS.Core.Hvdk
         private void DeviceAttachedHandler()
         {
             Attached = true;
-            Console.WriteLine("HvdkDevice attached.");
         }
 
         private void DeviceRemovedHandler()
         {
             Attached = false;
-            Console.WriteLine("HvdkDevice removed.");
         }
-
-        //public void SendCtor()
-        //{
-        //    byte c = _keyboardUtils.GetKeyKeyCode("c");
-        //    byte t = _keyboardUtils.GetKeyKeyCode("t");
-        //    byte o = _keyboardUtils.GetKeyKeyCode("o");
-        //    byte r = _keyboardUtils.GetKeyKeyCode("r");
-        //    byte tab = _keyboardUtils.GetKeyKeyCode("TAB");
-
-        //    int sleep = 1;
-
-        //    Send(0, 0, c, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-        //    Send(0, 0, 0, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-
-        //    Send(0, 0, t, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-        //    Send(0, 0, 0, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-
-        //    Send(0, 0, o, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-        //    Send(0, 0, 0, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-
-        //    Send(0, 0, r, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-        //    Send(0, 0, 0, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-
-        //    Send(0, 0, tab, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-        //    Send(0, 0, 0, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-
-        //    Send(0, 0, tab, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-        //    Send(0, 0, 0, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(sleep);
-        //}
-
-        //public void SendCtrlKD()
-        //{
-        //    var ctrlKey = _keyboardUtils.GetModifierKeyCode("[LCTRL]");
-        //    byte k = _keyboardUtils.GetKeyKeyCode("k");
-        //    byte d = _keyboardUtils.GetKeyKeyCode("d");
-        //    byte e = _keyboardUtils.GetKeyKeyCode("e");
-        //    byte s = _keyboardUtils.GetKeyKeyCode("s");
-
-        //    Send(ctrlKey, 0, k, d, 0, 0, 0, 0);
-        //    Thread.Sleep(10);
-        //    Send(0, 0, 0, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(10);
-
-        //    Send(ctrlKey, 0, k, e, 0, 0, 0, 0);
-        //    Thread.Sleep(10);
-        //    Send(0, 0, 0, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(10);
-
-        //    Send(ctrlKey, 0, s, 0, 0, 0, 0, 0);
-        //    Thread.Sleep(10);
-        //    Send(0, 0, 0, 0, 0, 0, 0, 0);
-        //}
 
         public void SendEmpty()
         {

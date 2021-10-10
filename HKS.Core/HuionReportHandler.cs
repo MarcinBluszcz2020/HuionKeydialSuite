@@ -10,11 +10,11 @@ namespace HKS.Core
         private readonly KeystrokeHelper _keystrokeHelper;
         private readonly HuionMap _map;
 
-        public HuionReportHandler(HuionKD100 huionKD100, KeystrokeHelper keystrokeHelper)
+        public HuionReportHandler(HuionKD100 huionKD100, KeystrokeHelper keystrokeHelper, HuionMap keyMap)
         {
             _huionKD100 = huionKD100;
             _keystrokeHelper = keystrokeHelper;
-            _map = MapHelper.GetMap();
+            _map = keyMap;
 
             _huionKD100.KeyReport += _huionKD100_KeyReport;
         }
