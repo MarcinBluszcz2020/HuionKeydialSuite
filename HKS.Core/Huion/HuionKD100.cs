@@ -4,18 +4,15 @@ using System.Linq;
 
 namespace HKS.Core.Huion
 {
-    public class HuionKD100 : IDisposable
+    public class HuionKD100
     {
         private const byte KeyReportFirstByte = 224;
         private const byte DialReportFirstByte = 241;
+        private const string WiredDevicePathPart = "&mi_00&col01#";
+        private const string WirelessDevicePathPart = "&mi_00#";
 
-        private HidDevice _device;
-
-        public bool Attached
-        {
-            get;
-            private set;
-        }
+        private RoboustDevice _wiredRoboustDevice;
+        private RoboustDevice _wirelessRoboustDevice;
 
         public event EventHandler<HuionKeyReport> KeyReport;
         public event EventHandler DialClockwiseTick;
@@ -23,56 +20,40 @@ namespace HKS.Core.Huion
 
         public HuionKD100()
         {
+            _wiredRoboustDevice = new RoboustDevice(GetHuionWiredHidDevice);
+            _wiredRoboustDevice.ReportReceived += _roboustDevice_ReportReceived;
+
+            _wirelessRoboustDevice = new RoboustDevice(GetHuionWirelessHidDevice);
+            _wirelessRoboustDevice.ReportReceived += _roboustDevice_ReportReceived;
+        }
+
+        private void _roboustDevice_ReportReceived(object sender, HidReport e)
+        {
+            if (IsKeyReport(e.Data))
+            {
+                HandleKeyReport(e);
+            }
+
+            if (IsDialReport(e.Data))
+            {
+                HandleDialReport(e.Data);
+            }
+        }
+
+        private HidDevice GetHuionWiredHidDevice()
+        {
             var huionDevices = HidDevices.Enumerate((int)DriverConst.HuionVendorId).ToList();
-            _device = huionDevices.FirstOrDefault(o => o.DevicePath.Contains("mi_00"));
+            var device = huionDevices.FirstOrDefault(o => o.DevicePath.Contains(WiredDevicePathPart));
 
-            if (_device == null)
-            {
-                throw new Exception("Huion KD 100 device not found");
-            }
-
-            _device.OpenDevice();
-
-            _device.Inserted += DeviceAttachedHandler;
-            _device.Removed += DeviceRemovedHandler;
-
-            _device.MonitorDeviceEvents = true;
-
-            _device.ReadReport(OnReport);
+            return device;
         }
 
-        private void DeviceAttachedHandler()
+        private HidDevice GetHuionWirelessHidDevice()
         {
-            Attached = true;
-            _device.ReadReport(OnReport);
-        }
+            var huionDevices = HidDevices.Enumerate((int)DriverConst.HuionVendorId).ToList();
+            var device = huionDevices.FirstOrDefault(o => o.DevicePath.Contains(WirelessDevicePathPart));
 
-        private void DeviceRemovedHandler()
-        {
-            Attached = false;
-        }
-
-        private void OnReport(HidReport report)
-        {
-            _device.ReadReport(OnReport);
-
-            if (!Attached)
-            {
-                return;
-            }
-
-            if (report.ReadStatus == HidDeviceData.ReadStatus.Success)
-            {
-                if (IsKeyReport(report.Data))
-                {
-                    HandleKeyReport(report);
-                }
-
-                if (IsDialReport(report.Data))
-                {
-                    HandleDialReport(report.Data);
-                }
-            }
+            return device;
         }
 
         private void HandleKeyReport(HidReport report)
@@ -178,11 +159,6 @@ namespace HKS.Core.Huion
             var report = reportBuilder.BuildReport();
 
             return report;
-        }
-
-        public void Dispose()
-        {
-            _device?.Dispose();
         }
     }
 }

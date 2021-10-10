@@ -54,12 +54,14 @@
     <Compile Include="Hvdk\KeystrokeHelper.cs" />
     <Compile Include="Hvdk\ModifierKey.cs" />
     <Compile Include="Hvdk\SetFeatureKeyboard.cs" />
+    <Compile Include="DeviceWaiterTask.cs" />
     <Compile Include="MapHelper.cs" />
     <Compile Include="Map\HuionMap.cs" />
     <Compile Include="Map\HuionMapItem.cs" />
     <Compile Include="Map\HuionMapItemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Hvdk\HvdkDevice.cs" />
+    <Compile Include="RoboustDevice.cs" />
     <Compile Include="SerializerHelper.cs" />
   </ItemGroup>
   <ItemGroup>

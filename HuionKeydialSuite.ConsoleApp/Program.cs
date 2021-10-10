@@ -9,10 +9,12 @@ namespace HuionKeydialSuite.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var huion = new HKS.Core.Huion.HuionKD100();
-            var hvdk = new HKS.Core.Hvdk.HvdkDevice();
+            HuionKD100Test.Test();
 
-            var reportHandler = new HuionReportHandler(huion, new KeystrokeHelper(hvdk), MapHelper.GetMap());
+            //var huion = new HKS.Core.Huion.HuionKD100();
+            //var hvdk = new HKS.Core.Hvdk.HvdkDevice();
+
+            //var reportHandler = new HuionReportHandler(huion, new KeystrokeHelper(hvdk), MapHelper.GetMap());
 
             var cts = new CancellationTokenSource();
 

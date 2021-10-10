@@ -25,21 +25,6 @@ namespace HKS.Core.Hvdk
             }
 
             _device.OpenDevice();
-
-            _device.Inserted += DeviceAttachedHandler;
-            _device.Removed += DeviceRemovedHandler;
-
-            _device.MonitorDeviceEvents = true;
-        }
-
-        private void DeviceAttachedHandler()
-        {
-            Attached = true;
-        }
-
-        private void DeviceRemovedHandler()
-        {
-            Attached = false;
         }
 
         public void SendEmpty()
