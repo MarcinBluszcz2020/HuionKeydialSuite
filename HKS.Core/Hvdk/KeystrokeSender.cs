@@ -84,6 +84,8 @@ namespace HKS.Core.Hvdk
                 Thread.Sleep(10);
 
                 _hvdkDevice.SendEmpty();
+
+                Thread.Sleep(10);
             }
         }
     }
