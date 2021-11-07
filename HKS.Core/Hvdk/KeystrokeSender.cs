@@ -4,12 +4,12 @@ using System.Threading;
 
 namespace HKS.Core.Hvdk
 {
-    public class KeystrokeHelper
+    public class KeystrokeSender
     {
         private readonly HvdkDevice _hvdkDevice;
         private readonly object _lock;
 
-        public KeystrokeHelper(HvdkDevice hvdkDevice)
+        public KeystrokeSender(HvdkDevice hvdkDevice)
         {
             _hvdkDevice = hvdkDevice;
             _lock = new object();

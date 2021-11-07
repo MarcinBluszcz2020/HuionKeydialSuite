@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{142EFEB0-EB01-4FC5-89BF-6A7DD4DB7D08}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HKS.Core</RootNamespace>
-    <AssemblyName>HKS.Core</AssemblyName>
+    <ProjectGuid>{2D13EC52-D500-4656-BD96-2D237EBBE724}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>HuionKeydialSuite.WindowsService</RootNamespace>
+    <AssemblyName>HuionKeydialSuite.WindowsService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,46 +34,57 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DriverConst.cs" />
-    <Compile Include="HuionReportHandler.cs" />
-    <Compile Include="Huion\HuionKD100.cs" />
-    <Compile Include="Huion\HuionKeyReport.cs" />
-    <Compile Include="Huion\HuionKey.cs" />
-    <Compile Include="Huion\HuionKeyReportBuilder.cs" />
-    <Compile Include="Huion\HuionKeyReportItem.cs" />
-    <Compile Include="Hvdk\KeyboardUtils.cs" />
-    <Compile Include="Hvdk\KeyboardUtils.Keys.cs" />
-    <Compile Include="Hvdk\KeyboardUtils.ModifierKeys.cs" />
-    <Compile Include="Hvdk\KeystrokeSender.cs" />
-    <Compile Include="Hvdk\ModifierKey.cs" />
-    <Compile Include="Hvdk\SetFeatureKeyboard.cs" />
-    <Compile Include="DeviceWaiterTask.cs" />
-    <Compile Include="MapHelper.cs" />
-    <Compile Include="Map\HuionMap.cs" />
-    <Compile Include="Map\HuionMapItem.cs" />
-    <Compile Include="Map\HuionMapItemType.cs" />
+    <Compile Include="HuionKeydialSuiteService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HuionKeydialSuiteService.Designer.cs">
+      <DependentUpon>HuionKeydialSuiteService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Hvdk\HvdkDevice.cs" />
-    <Compile Include="RoboustDevice.cs" />
-    <Compile Include="SerializerHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HidLibrary\HidLibrary.csproj">
-      <Project>{b3a10e2d-966b-4c7f-b059-2c7918d06450}</Project>
-      <Name>HidLibrary</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HuionKeydialSuiteService.resx">
+      <DependentUpon>HuionKeydialSuiteService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HKS.Core\HKS.Core.csproj">
+      <Project>{142efeb0-eb01-4fc5-89bf-6a7dd4db7d08}</Project>
+      <Name>HKS.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Huion\HuionKD100Layout.png" />
+    <Content Include="InstallUtil.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mapConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

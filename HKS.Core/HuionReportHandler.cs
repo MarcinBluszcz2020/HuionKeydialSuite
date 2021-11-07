@@ -7,10 +7,10 @@ namespace HKS.Core
     public class HuionReportHandler
     {
         private readonly HuionKD100 _huionKD100;
-        private readonly KeystrokeHelper _keystrokeHelper;
+        private readonly KeystrokeSender _keystrokeHelper;
         private readonly HuionMap _map;
 
-        public HuionReportHandler(HuionKD100 huionKD100, KeystrokeHelper keystrokeHelper, HuionMap keyMap)
+        public HuionReportHandler(HuionKD100 huionKD100, KeystrokeSender keystrokeHelper, HuionMap keyMap)
         {
             _huionKD100 = huionKD100;
             _keystrokeHelper = keystrokeHelper;

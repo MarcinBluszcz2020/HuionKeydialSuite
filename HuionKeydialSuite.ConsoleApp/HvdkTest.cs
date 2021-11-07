@@ -24,7 +24,7 @@ namespace HuionKeydialSuite.ConsoleApp
 
             var device = new HKS.Core.Hvdk.HvdkDevice();
 
-            var keystrokeHelper = new KeystrokeHelper(device);
+            var keystrokeHelper = new KeystrokeSender(device);
 
             keystrokeHelper.SendKeystroke("[LSHIFT]+s");
         }

@@ -1,13 +1,12 @@
 ﻿using HKS.Core.Hvdk;
 using HKS.Core.Map;
-using System;
 using System.IO;
 
 namespace HKS.Core
 {
     public class MapHelper
     {
-        private const string FileName = "mapConfig.xml";
+        private const string FileName = @"C:\mapConfig.xml";
 
         public static HuionMap GetMap()
         {

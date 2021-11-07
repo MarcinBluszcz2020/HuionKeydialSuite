@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace HKS.Core.Hvdk
 {
@@ -14,14 +10,13 @@ namespace HKS.Core.Hvdk
 
             sb.AppendLine();
             sb.AppendLine("<!--");
-
             sb.AppendLine();
-
             sb.AppendLine("Modifiers: ");
             sb.AppendLine();
+
             var modiferKeys = ModifierKeys.GetKeys();
 
-            foreach(var modifier in modiferKeys)
+            foreach (var modifier in modiferKeys)
             {
                 sb.AppendLine(modifier);
             }
@@ -29,6 +24,7 @@ namespace HKS.Core.Hvdk
             sb.AppendLine();
             sb.AppendLine("Keys: ");
             sb.AppendLine();
+
             var keys = Keys.GetKeys();
 
             foreach (var key in keys)
@@ -37,10 +33,7 @@ namespace HKS.Core.Hvdk
             }
 
             sb.AppendLine();
-
             sb.AppendLine("-->");
-
-            
 
             return sb.ToString();
         }
