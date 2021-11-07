@@ -6,7 +6,7 @@ namespace HKS.Core
 {
     public class MapHelper
     {
-        private const string FileName = @"C:\mapConfig.xml";
+        private const string FileName = @"C:\HuionKeydialSuite.WindowsService\mapConfig.xml";
 
         public static HuionMap GetMap()
         {
